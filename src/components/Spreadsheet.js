@@ -6,12 +6,17 @@ class Spreadsheet extends Component {
     data: {}
   };
 
+  handleUpdate = () => {
+    console.log("hit------foce---------");
+    this.forceUpdate();
+  };
+
   render() {
     const { data } = this.state;
     return (
       <div>
         heyo
-        <Rows data={data} />
+        <Rows data={data} handleUpdate={this.handleUpdate} />
       </div>
     );
   }
