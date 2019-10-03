@@ -1,13 +1,13 @@
 export function add(newEntry, cellId, data) {
-  let z = new Object();
-  data[cellId] = z;
-  z.wtf = function() {
+  let newCell = new Object();
+
+  data[cellId] = newCell;
+  newCell.eqString = function() {
     return newEntry.toString();
   };
-  z.newFun = () => {
+  newCell.calculator = () => {
     if (newEntry !== "" && newEntry[0] === "=") {
-      let x = newEntry.substr(1);
-      let vals = x.split("+");
+      let vals = parseString(newEntry);
       let newString = "";
       let index = 0;
       let end = vals.length;
@@ -15,10 +15,10 @@ export function add(newEntry, cellId, data) {
         let lengthDiff = end - index;
         let currentVal = vals[index];
         let dataVal = data[currentVal];
-        if (dataVal && dataVal.wtf().indexOf("=") !== -1) {
-          dataVal = dataVal.wtf().substr(1);
-        } else if (dataVal && dataVal.wtf()) {
-          dataVal = dataVal.wtf();
+        if (dataVal && dataVal.eqString().indexOf("=") !== -1) {
+          dataVal = parseString(dataVal.eqString(), true);
+        } else if (dataVal && dataVal.eqString()) {
+          dataVal = dataVal.eqString();
         }
         if (Number(currentVal)) {
           newString += currentVal;
@@ -43,7 +43,44 @@ export function add(newEntry, cellId, data) {
 
         index += 1;
       }
+      updateVals(cellId, data);
       return eval(newString);
-    } else return newEntry;
+    } else {
+      updateVals(cellId, data);
+      return newEntry;
+    }
   };
+}
+
+function parseString(str, n = null) {
+  if (n) {
+    return str.substr(1);
+  } else {
+    let strEquation = str.substr(1);
+    let x = strEquation.split("+");
+
+    return x;
+  }
+}
+
+function updateVals(cell, data) {
+  let effectedCells = Object.keys(data).filter(key => {
+    if (data[key].eq) {
+      return data[key].eq.substr(1).indexOf(cell) !== -1;
+    }
+  });
+  if (effectedCells && effectedCells.length > 0) {
+    updateCells(effectedCells, data);
+  }
+}
+
+function updateCells(effectedCells, data) {
+  effectedCells.forEach(c => {
+    if (c) {
+      let currentEle = document.getElementById(c);
+      data[c].value = data[c].calculator();
+      data[c].eqString();
+      currentEle.value = data[c].calculator();
+    }
+  });
 }
