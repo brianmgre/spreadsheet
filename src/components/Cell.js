@@ -9,6 +9,13 @@ class Cell extends Component {
     newEntry: ""
   };
 
+  componentDidMount() {
+    if (this.props.data[this.props.cellId])
+      this.setState({
+        newEntry: this.props.data[this.props.cellId].calculator()
+      });
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -25,15 +32,20 @@ class Cell extends Component {
       let value = newEntry.replace(/\s/g, "").toUpperCase();
 
       add(value, cellId, data);
-      data[cellId].value = data[cellId].newFun();
-      data[cellId].eq = data[cellId].wtf();
+      data[cellId].value = data[cellId].calculator();
+      data[cellId].eq = data[cellId].eqString();
       this.setState({
-        newEntry: data[cellId].newFun()
+        newEntry: data[cellId].calculator()
       });
     } else if (Number(newEntry)) {
       add(newEntry, cellId, data);
-      data[cellId].value = data[cellId].newFun();
-      data[cellId].eq = data[cellId].wtf();
+      data[cellId].value = data[cellId].calculator();
+      data[cellId].eq = data[cellId].eqString();
+      this.setState({
+        newEntry: data[cellId].calculator()
+      });
+    } else {
+      data[cellId] = newEntry;
     }
   };
 
@@ -42,7 +54,7 @@ class Cell extends Component {
 
     if (data[cellId]) {
       this.setState({
-        newEntry: data[cellId].wtf()
+        newEntry: data[cellId].eqString()
       });
     } else {
       return;
@@ -61,11 +73,12 @@ class Cell extends Component {
             name="newEntry"
             variant="outlined"
             margin="dense"
-            id="outlined-dense"
+            id={this.props.cellId}
             onBlur={this.handleBlur}
             onChange={this.handleChange}
             value={this.state.newEntry}
             onFocus={this.handleFocus}
+            className={this.props.cellId}
           />
         )}
       </Grid>
