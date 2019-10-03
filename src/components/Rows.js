@@ -6,10 +6,8 @@ const Rows = props => {
   const allRows = [];
 
   for (let i = 0; i < 11; i++) {
-    const { data, handleUpdate } = props;
-    allRows.push(
-      <Cells id={i} key={i} data={data} handleUpdate={handleUpdate} />
-    );
+    const { data } = props;
+    allRows.push(<Cells id={i} key={i} data={data} />);
   }
   return (
     <Grid container spacing={0} alignItems="center" style={{ padding: 20 }}>

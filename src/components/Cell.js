@@ -10,9 +10,10 @@ class Cell extends Component {
   };
 
   componentDidMount() {
-    if (this.props.data[this.props.cellId])
+    const { data, cellId } = this.props;
+    if (data[cellId])
       this.setState({
-        newEntry: this.props.data[this.props.cellId].calculator()
+        newEntry: data[cellId].calculator()
       });
   }
 
@@ -24,7 +25,7 @@ class Cell extends Component {
 
   handleBlur = () => {
     const { newEntry } = this.state;
-    const { cellId, data, handleUpdate } = this.props;
+    const { cellId, data } = this.props;
 
     if (this.state.newEntry === "") {
       return;
@@ -62,23 +63,22 @@ class Cell extends Component {
   };
 
   render() {
-    const { data, cellId } = this.props;
+    const { cellId, legend } = this.props;
+    const { newEntry } = this.state;
     return (
       <Grid item xs={1}>
-        {this.props.legend ? (
-          this.props.legend
+        {legend ? (
+          legend
         ) : (
           <TextField
-            placeholder={this.props.cellId}
             name="newEntry"
             variant="outlined"
             margin="dense"
-            id={this.props.cellId}
+            id={cellId}
             onBlur={this.handleBlur}
             onChange={this.handleChange}
-            value={this.state.newEntry}
+            value={newEntry}
             onFocus={this.handleFocus}
-            className={this.props.cellId}
           />
         )}
       </Grid>
