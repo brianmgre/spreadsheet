@@ -15,7 +15,6 @@ class Spreadsheet extends Component {
     const { data } = this.state;
     return (
       <div>
-        heyo
         <Rows data={data} handleUpdate={this.handleUpdate} />
       </div>
     );
