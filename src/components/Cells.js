@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Cell from "./Cell";
 import Grid from "@material-ui/core/Grid";
 
-const alphabet = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const Cells = props => {
   const allCells = [];
@@ -10,11 +10,6 @@ const Cells = props => {
   for (let i = 0; i < 11; i++) {
     const { data, id, handleUpdate } = props;
 
-    // if (i === 0 && id === 0) {
-    //   allCells.push(
-    //     <Cell cellId={"0" + id} key={"0" + id} legend={" start"} data={data} />
-    //   );
-    // } else
     if (id === 0) {
       allCells.push(
         <Cell
