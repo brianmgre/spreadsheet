@@ -9,7 +9,8 @@ const styles = theme => ({ root: {}, addIcon: {} });
 class Welcome extends Component {
   state = { showWelcomeForm: false };
 
-  handleToggle = () => {
+  handleToggle = e => {
+    e.preventDefault();
     const { showWelcomeForm } = this.state;
     this.setState({
       showWelcomeForm: !showWelcomeForm
@@ -17,11 +18,18 @@ class Welcome extends Component {
   };
 
   render() {
-    const { classes, onClose } = this.props;
+    const { classes, onClose, data, updateName } = this.props;
     const { showWelcomeForm } = this.state;
     return (
       <Paper className={classes.root}>
-        {showWelcomeForm ? <WelcomeForm onClose={onClose} /> : null}
+        {showWelcomeForm ? (
+          <WelcomeForm
+            onClose={onClose}
+            data={data}
+            handleToggle={this.handleToggle}
+            updateName={updateName}
+          />
+        ) : null}
         <Icon className={classes.addIcon} onClick={this.handleToggle}>
           fiber_new
         </Icon>

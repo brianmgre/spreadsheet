@@ -25,11 +25,11 @@ class SaveModal extends Component {
   state = {};
 
   render() {
-    const { open, modalOpen, classes } = this.props;
+    const { open, modalOpen, data, classes, updateName } = this.props;
     return (
       <Modal open={open} onClose={modalOpen}>
         <Paper className={classes.modalContainer}>
-          <Welcome onClose={modalOpen} />
+          <Welcome onClose={modalOpen} data={data} updateName={updateName} />
         </Paper>
       </Modal>
     );
