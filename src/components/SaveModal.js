@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Modal from "@material-ui/core/Modal";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Welcome from "./Welcome";
 
 const styles = theme => ({
   modalContainer: {
@@ -21,19 +20,15 @@ const styles = theme => ({
   }
 });
 
-class SaveModal extends Component {
-  state = {};
-
-  render() {
-    const { open, modalOpen, data, classes, updateName } = this.props;
-    return (
-      <Modal open={open} onClose={modalOpen}>
-        <Paper className={classes.modalContainer}>
-          <Welcome onClose={modalOpen} data={data} updateName={updateName} />
-        </Paper>
-      </Modal>
-    );
-  }
-}
+const SaveModal = props => {
+  const { open, saveOpen, classes } = props;
+  return (
+    <Modal open={open} onClose={saveOpen}>
+      <Paper className={classes.modalContainer}>
+        <h2>Your Spreadsheet has been Save!</h2>
+      </Paper>
+    </Modal>
+  );
+};
 
 export default withStyles(styles)(SaveModal);
