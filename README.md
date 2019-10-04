@@ -1,5 +1,5 @@
 
-<h1>Notes Application<h1>
+<h1>Spreadsheet Application<h1>
 
 <h2>Tech Used</h2>
 
