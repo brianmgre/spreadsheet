@@ -1,5 +1,5 @@
 
-<h1>Notes Application<h1>
+<h1>Spreadsheet Application<h1>
 
 <h2>Tech Used</h2>
 
@@ -20,7 +20,7 @@
 
 <h2>Back-end Variables:</h2>
 
-`ORIGN` location of client.
+`ORIGIN` location of client.
 
 
 `MONGO_URL` link to your database.
