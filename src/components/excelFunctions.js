@@ -59,6 +59,8 @@ export function add(newEntry, cellId, data) {
       return (data[cellId].value = "#VALUE!");
     }
   };
+  newCell.eq = newCell.eqString();
+  newCell.value = newCell.calculator();
 }
 
 export function parseString(str, n = null) {
